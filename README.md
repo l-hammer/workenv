@@ -47,7 +47,7 @@ $ sudo apt-get install ctags tree vim
 
 ```
 $ cd ~
-$ git clone https://github.com/hy0kl/profile.git    # https协议,防止抛ssh-key无权限
+$ git clone https://github.com/l-hammer/workenv.git # https协议,防止抛ssh-key无权限
 $ cd profile
 $ ./install.sh
 ```
