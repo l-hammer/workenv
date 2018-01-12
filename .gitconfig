@@ -1,0 +1,126 @@
+[user]
+    name  = "songhw"
+    email = "lhammering@gmail.com"
+
+[merge]
+    summary = true
+    tool = vimdiff
+
+[diff]
+    renames = copy
+    tool    = vimdiff
+
+[difftool]
+    prompt  = no
+[diff "odf"]
+    command = odt2txt
+[diff "jpg"]
+    command = exiftool
+
+[color]
+     diff   = always
+     branch = auto
+     interactive = auto
+     grep = auto
+     status = true
+     showbranch = auto
+     ui = true
+
+[color "diff"]
+    meta = magenta black bold
+    whitespace = red reverse
+
+[color "branch"]
+    current  = bold green
+    local    = normal
+    remote   = bold red
+    upstream = bold blue
+
+[status]
+    submodulesummary = -1
+
+[format]
+    numbered = auto
+
+[alias]
+    sed  = !git ls-files --stage | grep ^100 | awk '{print $4}' | xargs sed $@
+
+    # 日志操作简化,并将日志格式化
+    who = shortlog -n -s --no-merges
+    lg  = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lp  = log --color --pretty=oneline --abbrev-commit --graph --decorate
+    lns = log --color --name-status --date=iso
+    lst = log --color --stat --date=iso
+    ldi = log --color --date=iso
+    ldp = log --color --date=iso -p
+    # 最新一条 commit log 摘要
+    l1  = !git --no-pager log --max-count=1 --date=iso
+    # 最后一次提交的 hash 串
+    lh  = rev-parse HEAD
+
+    gpc= grep -n --color -E
+    ci = commit
+    co = checkout
+    st = status
+    # 查看远程分支,远程分支会用红色表示出来
+    ba = branch -a
+    bv = branch -v
+    bm = branch -m
+    bd = branch -d
+    bc = checkout -b
+    cb = checkout -b
+    rt = reset --hard
+    cp = cherry-pick -x
+    nb = checkout -b
+    mg = merge
+    df = diff
+    rv = remote -v
+    fa = fetch --all
+    # 刻意地创造提交线图分叉
+    mnf = merge --no-ff
+    rso = remote show origin
+    # 清除除在本地有但在远程库中已经不存在的分支 git fetch -p
+    rpo = remote prune origin
+
+    # 'git add -u' 只包含刪除的檔案,不包含新增檔案
+    # 'git add .' 包含修改和新增的檔案,但是不包含刪除
+    # 'git addall' 通通加到 staging
+    au = add -u
+    awd= add .
+    aa = !sh -c 'git add . && git add -u'
+
+    # To list untracked files
+    ut = ls-files --other --exclude-standard
+    # list tracked files
+    tf = ls-files
+    # show modified files
+    lm = ls-files -m
+    # show deleted files
+    ld = ls-files -d
+    # show unmerged files
+    lu = ls-files -u
+
+    unstage  = reset HEAD
+    uncommit = reset --soft HEAD^
+    amend    = commit --amend
+
+    # 使用 vimdiff 查看 diff 文件
+    vdf = difftool
+
+    # 临时保存
+    ss = stash save
+    sp = stash pop
+    sl = stash list
+
+[core]
+    # 对 0x80以上的字符不进行quote,以正常显示中文
+    quotepath = false
+    editor = vim
+
+[branch "master"]
+    remote = origin
+    merge  = refs/heads/master
+
+[push]
+    # nothing, matching, upstream, simple, current
+    default = current
